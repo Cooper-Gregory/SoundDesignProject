@@ -8,7 +8,7 @@ public class setAttackData : MonoBehaviour
     //Ask me to come over for help if you want custom sound effects for selecting different abilities from the menu screen
     //but that would probably be a while of work to handle
 
-    public int sad_attackSlotsAmount = 3;
+    public int sad_attackSlotsAmount = 3; 
     public int sad_attackParamAmount = 8;
     public float[,] p0_attackChoices;
     public float[,] p1_attackChoices;
