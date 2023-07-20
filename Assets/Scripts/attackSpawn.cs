@@ -47,6 +47,7 @@ public class attackSpawn : MonoBehaviour
     public AudioSource swordSwing_1;
     public AudioSource swordSwing_2;
     public AudioSource swordSwing_3;
+    public AudioSource Explosion;
 
     void Start()
     {
@@ -164,7 +165,7 @@ public class attackSpawn : MonoBehaviour
                         SwordSoundChooser();
                         break;
                     case 1:
-                        //play explosion sound
+                        Explosion.Play();
                         break;
                     case 2:
                         GunShot.Play();
