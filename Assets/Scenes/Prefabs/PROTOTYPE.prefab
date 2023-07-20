@@ -371,6 +371,7 @@ MonoBehaviour:
   jumpHeight: 120
   deadzone: 0.1
   playerLookDirection: {x: 0, y: 0}
+  playerMoveDirection: {x: 0, y: 0}
   velocityClamp: 7
   groundDistance: 0.68
   friction: 4
@@ -380,6 +381,7 @@ MonoBehaviour:
     m_Bits: 8
   onGround: 0
   playerVelocity: {x: 0, y: 0}
+  Jumping: {fileID: 0}
 --- !u!114 &6505308214420552834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +411,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 1
   playerHealth: 100
+  attackSlotsAmount: 3
+  attackParamAmount: 8
+  attack_0:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  attack_1:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  attack_2:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  playerSettings: {fileID: 0}
 --- !u!114 &6505308214420552832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,16 +453,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c588eb9ea33dfe845b1e3ab5992035ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attacked: 0
-  attackHurtbox: {fileID: 6505308214904131047}
-  player: {fileID: 6505308214420552840}
-  playerID: 0
   defaultRange: 3
   defaultDirection: {x: 1, y: 0}
   defaultDamage: 10
   defaultKnockback: 0.01
   defaultDuration: 5
   defaultCooldown: 1
+  defaultSpeed: 1
+  attackHurtbox: {fileID: 6505308214904131047}
+  projectileHurtboxToIntance: {fileID: 0}
+  player: {fileID: 6505308214420552840}
+  knockbackCenter: {fileID: 0}
+  playerStats: {fileID: 0}
+  gameplayManager: {fileID: 0}
+  cooldownManager: {fileID: 0}
+  playerSettings: {fileID: 0}
+  currentAbilityUIManager: {fileID: 0}
+  playerID: 0
+  attackNumber: 0
+  attacked: 0
+  attacking: 0
+  onCooldown: 0
+  attackFriendlyFire: 0
+  playerAttacksSimple: 000000000000000000000000
 --- !u!114 &2223272732777631552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,8 +796,19 @@ MonoBehaviour:
   attackRange: 3
   attackDamage: 10
   attackKnockback: 0.01
+  friendlyFireMultiplier: 0.33
   playerID: 0
+  player: {fileID: 0}
+  testDisplay: {fileID: 0}
+  knockbackCenter: {fileID: 0}
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  opponent: {fileID: 0}
+  heading: {x: 0, y: 0, z: 0}
   damageDealt: 0
+  player2NotPresent: 0
+  friendlyFire: 0
 --- !u!61 &6505308214904131035
 BoxCollider2D:
   m_ObjectHideFlags: 0

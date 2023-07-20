@@ -31,6 +31,7 @@ public class movementController : MonoBehaviour
 
     public Vector2 playerVelocity; //Displays the player's current velocity for debug purposes.
 
+    public AudioSource Jumping;
     void Update()
     { 
         Movement();
@@ -49,6 +50,7 @@ public class movementController : MonoBehaviour
         {
             jumped = true;
             Movement();
+         
         }
         else
         {
@@ -95,6 +97,7 @@ public class movementController : MonoBehaviour
         //Jumps.
         if (onGround == true && jumped)
         {
+            Jumping.Play();
             rigid.AddForce(transform.up * jumpHeight / 100000.0f, ForceMode2D.Impulse);
         }
     }

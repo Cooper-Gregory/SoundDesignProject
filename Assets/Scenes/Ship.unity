@@ -11238,6 +11238,7 @@ MonoBehaviour:
     m_Bits: 8
   onGround: 0
   playerVelocity: {x: 0, y: 0}
+  Jumping: {fileID: 0}
 --- !u!50 &1383357797
 Rigidbody2D:
   serializedVersion: 4

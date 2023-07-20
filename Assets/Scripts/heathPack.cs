@@ -13,7 +13,6 @@ public class heathPack : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.LogError(other.name);
         if (other.tag == "Player")
         {
             int otherID = other.gameObject.GetComponent<playerStats>().playerID;
