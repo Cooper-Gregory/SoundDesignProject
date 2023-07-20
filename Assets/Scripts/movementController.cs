@@ -31,7 +31,12 @@ public class movementController : MonoBehaviour
 
     public Vector2 playerVelocity; //Displays the player's current velocity for debug purposes.
 
+    [Header("Player Movement Sounds")]
     public AudioSource Jumping;
+    public AudioSource PlayerStep_1;
+    public AudioSource PlayerStep_2;
+    public AudioSource PlayerStep_3;
+
     void Update()
     { 
         Movement();
@@ -136,6 +141,20 @@ public class movementController : MonoBehaviour
             }
             if (moving)
             {
+                int randNum = Random.Range(0, 3);
+                if(randNum == 0)
+                {
+                    PlayerStep_1.Play();
+                }
+                else if (randNum == 1)
+                {
+                    PlayerStep_2.Play();
+                }
+                else
+                {
+                    PlayerStep_3.Play();
+                }
+
                 //This would be a good place to put a switch case for different ground audio effects
                 //The ground colliders all have different Physics materials, which can be checked via script
                 //;)
