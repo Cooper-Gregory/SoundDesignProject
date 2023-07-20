@@ -12,6 +12,8 @@ public class bounceOffWall : MonoBehaviour
     public GameObject gameManager;
     public GameObject player;
 
+    public AudioSource wallrebound;
+
     //When collision is detected, do some fun math
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -62,24 +64,28 @@ public class bounceOffWall : MonoBehaviour
             //Debug.Log("Roof!");
             newVelocity = new Vector2(velX * returnVelocity, velY * returnVelocity * -1f);
             rigid.velocity = (newVelocity);
+            wallrebound.Play();
         }
         else if (surfaceRotation.z == 0.0f && surfaceRotation.x == 1f) 
         {
             //Debug.Log("Floor!");
             newVelocity = new Vector2(velX * returnVelocity, velY * returnVelocity * -1f);
             rigid.velocity = (newVelocity);
+            wallrebound.Play();
         }
         else if (surfaceRotation.z < 0.0f)
         {
             //Debug.Log("Right Wall!");
             newVelocity = new Vector2(velX * returnVelocity * -1f, velY * returnVelocity);
             rigid.velocity = (newVelocity);
+            wallrebound.Play();
         }
         else if (surfaceRotation.z > 0.0f)
         {
             //Debug.Log("Left Wall!");
             newVelocity = new Vector2(velX * returnVelocity * -1f, velY * returnVelocity);
             rigid.velocity = (newVelocity);
+            wallrebound.Play();
         }
         //Debug.Log("New Velocity: " + newVelocity);
         //Debug.Log("Player Velocity: " + rigid.velocity);
