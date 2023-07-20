@@ -15,7 +15,8 @@ public class heathbarManager : MonoBehaviour
     public Text deathText;
     public string winText;
 
-    public AudioSource damageGrunt;
+    public AudioSource damageGrunt1;
+    public AudioSource damageGrunt2;
 
     public void OnPlayerConnected(PlayerInput player)
     {
@@ -37,7 +38,7 @@ public class heathbarManager : MonoBehaviour
     {
         if (playerID == 0)
         {
-            damageGrunt.Play();
+            damageGrunt1.Play();
             float maxHealth = 100.0f;
             player_0.GetComponent<playerStats>().playerHealth -= damage;
             float playerHealth = player_0.GetComponent<playerStats>().playerHealth;
@@ -56,7 +57,7 @@ public class heathbarManager : MonoBehaviour
         }
         else if (playerID == 1)
         {
-            damageGrunt.Play();
+            damageGrunt2.Play();
             float maxHealth = 100.0f;
             player_1.GetComponent<playerStats>().playerHealth -= damage;
             float playerHealth = player_1.GetComponent<playerStats>().playerHealth;
