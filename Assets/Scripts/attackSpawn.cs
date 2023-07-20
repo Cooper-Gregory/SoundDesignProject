@@ -39,6 +39,8 @@ public class attackSpawn : MonoBehaviour
     protected float attackDurationTimer;
     protected float cooldownDurationTimer;
 
+    public AudioSource GunShot;
+
     void Start()
     {
         playerID = player.GetComponent<playerStats>().playerID;
@@ -123,7 +125,7 @@ public class attackSpawn : MonoBehaviour
                         //play explosion sound
                         break;
                     case 2:
-                        //play gun sound
+                        GunShot.Play();
                         break;
                     default:
                         //play generic attack sound
