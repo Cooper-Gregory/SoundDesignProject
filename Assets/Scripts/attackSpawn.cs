@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.PostProcessing;
 
 public class attackSpawn : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class attackSpawn : MonoBehaviour
     public bool attacking = false;
     public bool onCooldown = false;
     public bool attackFriendlyFire = false;
+    public int[] playerAttacksSimple = new int[3];
 
     protected float attackDurationTimer;
     protected float cooldownDurationTimer;
@@ -43,6 +45,17 @@ public class attackSpawn : MonoBehaviour
         playerStats = player.GetComponent<playerStats>();
         gameplayManager = GameObject.Find("cooldownManager");
         playerSettings = GameObject.Find("playerSettings");
+
+        if (playerID == 0)
+        {
+            for (int i = 0; i < 3; i++)
+                playerAttacksSimple[i] = playerSettings.GetComponent<playerSettings>().GetComponent<playerSettings>().p0_attacks_simple[i];
+        }
+        else
+        {
+            for (int i = 0; i < 3; i++)
+                playerAttacksSimple[i] = playerSettings.GetComponent<playerSettings>().GetComponent<playerSettings>().p1_attacks_simple[i];
+        }
 
         if (playerID == 0)
             player.GetComponent<currentAbilityManager>().UpdateActiveAbility(playerSettings.GetComponent<playerSettings>().p0_attacks_simple[0]);
@@ -101,6 +114,22 @@ public class attackSpawn : MonoBehaviour
             //Ranged attack
             if (attacked && !(onCooldown || attacking))
             {
+                switch (playerAttacksSimple[attackNumber])
+                {
+                    case 0:
+                        //play sword sound
+                        break;
+                    case 1:
+                        //play explosion sound
+                        break;
+                    case 2:
+                        //play gun sound
+                        break;
+                    default:
+                        //play generic attack sound
+                        break;
+                }
+
                 defaultRange = player.GetComponent<playerStats>().attackSlots[attackNumber, 0];
                 defaultDamage = player.GetComponent<playerStats>().attackSlots[attackNumber, 2];
                 defaultKnockback = player.GetComponent<playerStats>().attackSlots[attackNumber, 3];
@@ -113,13 +142,29 @@ public class attackSpawn : MonoBehaviour
             {
                 attacked = false;
             }
-            
+
         }
         else
         {
             //Melee Attack
             if (attacked && !(onCooldown || attacking))
             {
+                switch (playerAttacksSimple[attackNumber])
+                {
+                    case 0:
+                        //play sword sound
+                        break;
+                    case 1:
+                        //play explosion sound
+                        break;
+                    case 2:
+                        //play gun sound
+                        break;
+                    default:
+                        //play generic attack sound
+                        break;
+                }
+
                 defaultRange = player.GetComponent<playerStats>().attackSlots[attackNumber, 0];
                 defaultDamage = player.GetComponent<playerStats>().attackSlots[attackNumber, 2];
                 defaultKnockback = player.GetComponent<playerStats>().attackSlots[attackNumber, 3];
@@ -132,9 +177,9 @@ public class attackSpawn : MonoBehaviour
             {
                 attacked = false;
             }
-            
+
         }
-        
+
     }
 
     public void SpawnAttack(float attackRange, Vector2 attackDirection, float attackDamage, float attackKnockback, GameObject hurtbox, GameObject player, bool friendlyFire)
@@ -143,10 +188,10 @@ public class attackSpawn : MonoBehaviour
 
         hurtbox.transform.localScale = new Vector3(attackRange, attackRange, attackRange);
         hurtbox.GetComponent<damager>().attackRange = attackRange;
-        hurtbox.GetComponent<damager>().attackDamage = attackDamage; 
+        hurtbox.GetComponent<damager>().attackDamage = attackDamage;
         hurtbox.GetComponent<damager>().attackKnockback = attackKnockback;
         hurtbox.GetComponent<damager>().playerID = player.GetComponent<playerStats>().playerID;
-        
+
         if (friendlyFire)
         {
             hurtbox.GetComponent<damager>().friendlyFire = true;
@@ -216,7 +261,7 @@ public class attackSpawn : MonoBehaviour
     {
         if (attacking)
         {
-                attackDurationTimer += Time.deltaTime;
+            attackDurationTimer += Time.deltaTime;
         }
         if (attackDurationTimer >= defaultDuration)
         {
