@@ -17,6 +17,7 @@ public class heathbarManager : MonoBehaviour
 
     public AudioSource damageGrunt1;
     public AudioSource damageGrunt2;
+    public AudioSource healAudio;
 
     public void OnPlayerConnected(PlayerInput player)
     {
@@ -84,6 +85,7 @@ public class heathbarManager : MonoBehaviour
         //This is basically an inverse of the TakeDamage() function, so placing healing effects here too would work correctly.
         if (playerID == 0)
         {
+            healAudio.Play();
             float maxHealth = 100.0f;
             player_0.GetComponent<playerStats>().playerHealth += healing;
             float playerHealth = player_0.GetComponent<playerStats>().playerHealth;
@@ -97,6 +99,7 @@ public class heathbarManager : MonoBehaviour
         }
         else if (playerID == 1)
         {
+            healAudio.Play();
             float maxHealth = 100.0f;
             player_1.GetComponent<playerStats>().playerHealth += healing;
             float playerHealth = player_1.GetComponent<playerStats>().playerHealth;
