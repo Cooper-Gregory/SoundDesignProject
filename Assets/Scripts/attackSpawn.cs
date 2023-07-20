@@ -1,9 +1,12 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.PostProcessing;
+using Random = UnityEngine.Random;
 
 public class attackSpawn : MonoBehaviour
 {
@@ -39,7 +42,11 @@ public class attackSpawn : MonoBehaviour
     protected float attackDurationTimer;
     protected float cooldownDurationTimer;
 
+    [Header("Audio Sources")]
     public AudioSource GunShot;
+    public AudioSource swordSwing_1;
+    public AudioSource swordSwing_2;
+    public AudioSource swordSwing_3;
 
     void Start()
     {
@@ -154,13 +161,13 @@ public class attackSpawn : MonoBehaviour
                 switch (playerAttacksSimple[attackNumber])
                 {
                     case 0:
-                        //play sword sound
+                        SwordSoundChooser();
                         break;
                     case 1:
                         //play explosion sound
                         break;
                     case 2:
-                        //play gun sound
+                        GunShot.Play();
                         break;
                     default:
                         //play generic attack sound
@@ -182,6 +189,25 @@ public class attackSpawn : MonoBehaviour
 
         }
 
+    }
+
+    public void SwordSoundChooser()
+    {
+
+        int chosenNumber = Random.Range(0, 3);
+
+        if( chosenNumber == 0)
+        {
+            swordSwing_1.Play();
+        }
+        else if ( chosenNumber == 1)
+        {
+            swordSwing_2.Play();
+        }
+        else
+        {
+            swordSwing_3.Play();
+        }
     }
 
     public void SpawnAttack(float attackRange, Vector2 attackDirection, float attackDamage, float attackKnockback, GameObject hurtbox, GameObject player, bool friendlyFire)
