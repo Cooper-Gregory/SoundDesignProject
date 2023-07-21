@@ -36,6 +36,9 @@ public class movementController : MonoBehaviour
     public AudioSource PlayerStep_1;
     public AudioSource PlayerStep_2;
     public AudioSource PlayerStep_3;
+    public bool playingSoundEffect = false;
+    public float waitingForFeet;
+
 
     void Update()
     { 
@@ -139,31 +142,54 @@ public class movementController : MonoBehaviour
                 normalizeVelocity.x = 0.0f;
                 rigid.velocity = normalizeVelocity;
             }
-            if (moving)
+            if (moving && onGround)
             {
-                int randNum = Random.Range(0, 3);
-                if(randNum == 0)
+                if(!playingSoundEffect)
                 {
-                    PlayerStep_1.Play();
-                }
-                else if (randNum == 1)
-                {
-                    PlayerStep_2.Play();
-                }
-                else
-                {
-                    PlayerStep_3.Play();
-                }
+                    StartCoroutine(FootStepWaitTime());
+                    playingSoundEffect = true;
 
+                }
+                
                 //This would be a good place to put a switch case for different ground audio effects
                 //The ground colliders all have different Physics materials, which can be checked via script
                 //;)
+            }
+            if(!moving || !onGround)
+            {
+                StopAllCoroutines();
+                playingSoundEffect = false;
+
             }
         }
         else
         {
             //Applies -y velocity as long as the player is not touching the ground.
             rigid.AddForce(-transform.up * gravity * Time.deltaTime / 10000.0f, ForceMode2D.Impulse);
+            
+        }
+    }
+    public IEnumerator FootStepWaitTime()
+    {
+
+        while (true)
+        {
+            int randNum = Random.Range(0, 3);
+
+            if (randNum == 0)
+            {
+                PlayerStep_1.Play();
+            }
+            else if (randNum == 1)
+            {
+                PlayerStep_2.Play();
+            }
+            else
+            {
+                PlayerStep_3.Play();
+            }
+            yield return new WaitForSeconds(waitingForFeet);
+
         }
     }
 }
